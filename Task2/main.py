@@ -9,10 +9,12 @@ right = int(input())
 print("Left : ")
 left = int(input())
 
-vertical = up - down
-horizontal = right - left
+def calculate_distance(u,d,r,l):
+    vertical = u - d
+    horizontal = r - l
 
-dist = math.sqrt(vertical**2 + horizontal**2)
-distance = round(dist)
+    dist = math.sqrt(vertical**2 + horizontal**2)
+    distance = round(dist)
+    return distance
 
-print("Distance from origin: ", distance)
+print("Distance from origin: ", calculate_distance(up,down,right,left))
