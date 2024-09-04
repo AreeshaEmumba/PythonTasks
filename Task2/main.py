@@ -1,13 +1,13 @@
 import math
+import argparse
 
-print("Up : ")
-up = int(input())
-print("Down : ")
-down = int(input())
-print("Right : ")
-right = int(input())
-print("Left : ")
-left = int(input())
+parser = argparse.ArgumentParser(description="Calculate distance from origin")
+parser.add_argument("--Up", type=int, default=0, help="Distance moved up")
+parser.add_argument("--Down", type=int, default=0, help="Distance moved down")
+parser.add_argument("--Right", type=int, default=0, help="Distance moved right")
+parser.add_argument("--Left", type=int, default=0, help="Distance moved left")
+
+arguments = parser.parse_args()
 
 def calculate_distance(u,d,r,l):
     vertical = u - d
@@ -17,4 +17,4 @@ def calculate_distance(u,d,r,l):
     distance = round(dist)
     return distance
 
-print("Distance from origin: ", calculate_distance(up,down,right,left))
+print("Distance from origin: ", calculate_distance(arguments.Up, arguments.Down, arguments.Right, arguments.Left))
