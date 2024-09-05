@@ -15,10 +15,17 @@ print (squared_values, "\n", cubed_values)
 
 plt.figure(figsize=(10,5))
 
-plt.subplot(1,1,1)
+plt.subplot(1,2,1)
 plt.plot(X, squared_values, marker = 'o', color = 'blue' , label = 'x^2')
 plt.title("Square of first 10 natural numbers")
 plt.xlabel("Natural Numbers")
 plt.ylabel("Squared Values")
+
+plt.subplot(1,2,2)
+plt.plot(X, cubed_values, marker = 'o', color = 'red', label = 'x^3')
+plt.title("Cube of first 10 Natural NUmbers")
+plt.xlabel("Natural Numbers")
+plt.ylabel("Cubed Values")
+
 
 plt.show()
