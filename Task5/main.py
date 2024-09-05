@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt
 
 def square(lst):
     return [x**2 for x in lst]
@@ -11,3 +12,13 @@ squared_values = square(X)
 cubed_values = cube(X)
 
 print (squared_values, "\n", cubed_values)
+
+plt.figure(figsize=(10,5))
+
+plt.subplot(1,1,1)
+plt.plot(X, squared_values, marker = 'o', color = 'blue' , label = 'x^2')
+plt.title("Square of first 10 natural numbers")
+plt.xlabel("Natural Numbers")
+plt.ylabel("Squared Values")
+
+plt.show()
