@@ -1,5 +1,4 @@
-,,,
-.
+,,,.
 ├── README.md
 ├── Task1
 │   └── main.py
@@ -16,5 +15,4 @@
 ├── Task8
 └── update_readme.sh
 
-8 directories, 7 files
-'''
+8 directories, 7 files'''
