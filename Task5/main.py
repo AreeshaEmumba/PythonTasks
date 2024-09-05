@@ -27,5 +27,5 @@ plt.title("Cube of first 10 Natural NUmbers")
 plt.xlabel("Natural Numbers")
 plt.ylabel("Cubed Values")
 
-
+plt.tight_layout
 plt.show()
