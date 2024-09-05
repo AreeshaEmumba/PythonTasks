@@ -1,5 +1,3 @@
-```
-PythonTasks
 .
 ├── README.md
 ├── Task1
@@ -16,4 +14,3 @@ PythonTasks
 └── update_readme.sh
 
 8 directories, 5 files
-```
