@@ -8,16 +8,16 @@ def run_command(command):
     else:
         return f"Error: {result.stderr}"  # Return error message if the command fails
 
-# Define the file paths (update the file paths as necessary)
-tmilt_file = "tmilt.txt"
-controller_file = "controller.txt"
-output_file = "parsed_information.txt"
+# Define the file paths
+tmilt_file = "/home/emumba/PythonTasks/Task7/tmilt.0.231215.075551.6BT+.3FzgZTbd.log"
+controller_file = "/home/emumba/PythonTasks/Task7/controller.231215.075537.fpMs.8qpS7S5pG.log"
+output_file = "/home/emumba/PythonTasks/Task7/parsed_information.txt"
 
 # Open the output file for writing
 with open(output_file, 'w') as f:
     # Extract information from the tmilt file using Linux commands
     f.write("Tmilt File Information:\n")
-    f.write("Working dir: " + run_command(f"grep 'Initial working dir:' {tmilt_file} | awk -F': ' '{{print $2}}'") + "\n")
+    f.write("Working dir: " + run_command(f"grep 'Initial working dir:' {tmilt_file} | awk -F': ' '{{print $3}}'") + "\n")
     f.write("Installation Location: " + run_command(f"grep 'Location of the installation:' {tmilt_file} | awk -F': ' '{{print $2}}'") + "\n")
     f.write("Log file Path: " + run_command(f"grep 'This log file is:' {tmilt_file} | awk -F': ' '{{print $2}}'") + "\n")
     f.write("Host: " + run_command(f"grep 'Running on:' {tmilt_file} | awk -F': ' '{{print $2}}'") + "\n")
