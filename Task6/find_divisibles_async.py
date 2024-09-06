@@ -23,7 +23,6 @@ async def async_find_divisibles(in_range, divisor):
     
     return result
 
-
 async def main():
     start_time = time.time()
     
