@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch
-from main import run_command, extract_info_from_file, write_to_output_file  # Replace with your actual module name
+from main import run_command, extract_info_from_file, write_to_output_file  
 
 class TestProgram(unittest.TestCase):
 
