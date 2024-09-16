@@ -1,104 +1,200 @@
 import subprocess
+import os
 
 def run_command(command):
-    """
-    Runs a shell command and returns its output or "Not Found" if the command fails.
-
-    Args:
-        command (str): The shell command to run.
-
-    Returns:
-        str: The result of the command or "Not Found" if the command fails.
-    """
     result = subprocess.run(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     if result.returncode == 0 and result.stdout.strip():
         return result.stdout.strip()  # Return the command output if successful
     else:
-        return "Not Found"  # Return "Not Found" if the command fails or has empty output
+       return " "  # Return " " if the command fails or has empty output
 
-def extract_info_from_file(file_path, patterns):
-    """
-    Extracts specific information from a file based on a list of patterns.
+# Functions to extract specific stats from tmilt files
+def extract_working_dir(file_path):
+    command = "grep 'Initial working dir:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
 
-    Args:
-        file_path (str): Path to the file from which to extract information.
-        patterns (dict): A dictionary where the key is the label and the value is the pattern to search.
+def extract_installation_location(file_path):
+    command = "grep 'Location of the installation:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
 
-    Returns:
-        dict: A dictionary of extracted information with the pattern name as keys.
-    """
-    results = {}
-    for label, command in patterns.items():
-        results[label] = run_command(command.format(file=file_path))
-    return results
+def extract_log_file_path(file_path):
+    command = "grep 'This log file is:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
 
-def write_to_output_file(output_file, sections):
-    """
-    Writes extracted information into an output file in a structured format.
+def extract_host(file_path):
+    command = "grep 'Running on:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
 
-    Args:
-        output_file (str): The path to the output file.
-        sections (list of tuples): A list of sections to write to the file, 
-                                   where each section is a tuple (title, info_dict).
-    """
+def extract_current_os(file_path):
+    command = "grep 'Current OS:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_uptime(file_path):
+    command = "grep 'Uptime:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_ram(file_path):
+    command = "grep 'RAM:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_build_info_tmilt(file_path):
+    command = "grep 'Build information:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_release(file_path):
+    command = "grep 'Release:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_build(file_path):
+    command = "grep 'Build:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_revision(file_path):
+    command = "grep 'Revision:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_sandbox(file_path):
+    command = "grep 'Sandbox:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_mbf_exec_time(file_path):
+    command = "grep 'MBF output generation exec time:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_qtm_exec_time(file_path):
+    command = "grep 'QTM exec time:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+
+# Functions to extract specific stats from controller files
+def extract_start_time(file_path):
+    command = "grep 'Start time:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_working_directory(file_path):
+    command = "grep 'Working Directory:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_installation_location_controller(file_path):
+    command = "grep 'Installation location:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_running_info(file_path):
+    # Assuming multi-line, you may want to capture several lines after this keyword
+    command = "grep -A 2 'Running Information:' {file}".format(file=file_path)
+    return run_command(command)
+
+def extract_build_info_controller(file_path):
+    # Same as tmilt but kept separate for controller-specific context
+    command = "grep 'Build information:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_ending_time(file_path):
+    command = "grep 'Ending time:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_session_duration(file_path):
+    command = "grep 'Session Duration:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_fatal_count(file_path):
+    command = "grep 'Fatal Count:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_error_count(file_path):
+    command = "grep 'Error Count:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_warning_count(file_path):
+    command = "grep 'Warning Count:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def extract_exit_code(file_path):
+    command = "grep 'Exit code:' {file} | awk -F': ' '{{print $2}}'".format(file=file_path)
+    return run_command(command)
+
+def process_tmilt_files(files):
+    tmilt_results = []
+    for file_path in files:
+        if os.path.exists(file_path):
+            result = {
+                "Working dir": extract_working_dir(file_path),
+                "Installation Location": extract_installation_location(file_path),
+                "Log file Path": extract_log_file_path(file_path),
+                "Host": extract_host(file_path),
+                "Current OS": extract_current_os(file_path),
+                "Uptime": extract_uptime(file_path),
+                "RAM": extract_ram(file_path),
+                "Build information": extract_build_info_tmilt(file_path),
+                "Release": extract_release(file_path),
+                "Build": extract_build(file_path),
+                "Revision": extract_revision(file_path),
+                "Sandbox": extract_sandbox(file_path),
+                "MBF exec time": extract_mbf_exec_time(file_path),
+                "QTM exec time": extract_qtm_exec_time(file_path),
+            }
+            tmilt_results.append((file_path, result))
+        else:
+            print(f"File not found: {file_path}")
+    return tmilt_results
+
+
+def process_controller_files(files):
+    controller_results = []
+    for file_path in files:
+        if os.path.exists(file_path):
+            result = {
+                "Start time": extract_start_time(file_path),
+                "Working Directory": extract_working_directory(file_path),
+                "Installation location": extract_installation_location_controller(file_path),
+                "Running Information": extract_running_info(file_path),
+                "Build information": extract_build_info_controller(file_path),
+                "Ending time": extract_ending_time(file_path),
+                "Session Duration": extract_session_duration(file_path),
+                "Fatal Count": extract_fatal_count(file_path),
+                "Error Count": extract_error_count(file_path),
+                "Warning Count": extract_warning_count(file_path),
+                "Exit code with description": extract_exit_code(file_path),
+            }
+            controller_results.append((file_path, result))
+        else:
+            print(f"File not found: {file_path}")
+    return controller_results
+
+
+def write_to_output_file(output_file, tmilt_sections, controller_sections):
     with open(output_file, 'w') as f:
-        for section_title, info_dict in sections:
-            f.write(f"{section_title}:\n")
+        for file_path, info_dict in tmilt_sections:
+            f.write(f"Tmilt File: {file_path}\n")
             for label, value in info_dict.items():
                 f.write(f"{label}: {value}\n")
-            f.write("\n")  # Add a new line after each section
+            f.write("\n")  # Add a new line after each file's stats
+
+        for file_path, info_dict in controller_sections:
+            f.write(f"Controller File: {file_path}\n")
+            for label, value in info_dict.items():
+                f.write(f"{label}: {value}\n")
+            f.write("\n")  # Add a new line after each file's stats
 
 if __name__ == "__main__":
-    # Define the file paths
-    tmilt_file = "/home/emumba/PythonTasks/Task7/tmilt.0.231215.075551.6BT+.3FzgZTbd.log"
-    controller_file = "/home/emumba/PythonTasks/Task7/controller.231215.075537.fpMs.8qpS7S5pG.log"
-    output_file = "/home/emumba/PythonTasks/Task7/parsed_information.txt"
-    
-    # Define patterns and commands for the tmilt file
-    tmilt_patterns = {
-        "Working dir": "grep 'Initial working dir:' {file} | awk -F': ' '{{print $2}}'",
-        "Installation Location": "grep 'Location of the installation:' {file} | awk -F': ' '{{print $2}}'",
-        "Log file Path": "grep 'This log file is:' {file} | awk -F': ' '{{print $2}}'",
-        "Host": "grep 'Running on:' {file} | awk -F': ' '{{print $2}}'",
-        "Current OS": "grep 'Current OS:' {file} | awk -F': ' '{{print $2}}'",
-        "Uptime": "grep 'Uptime:' {file} | awk -F': ' '{{print $2}}'",
-        "RAM": "grep 'RAM:' {file} | awk -F': ' '{{print $2}}'",
-        "Build information": "grep 'Build information:' {file} | awk -F': ' '{{print $2}}'",
-        "Release": "grep 'Release:' {file} | awk -F': ' '{{print $2}}'",
-        "Build": "grep 'Build:' {file} | awk -F': ' '{{print $2}}'",
-        "Revision": "grep 'Revision:' {file} | awk -F': ' '{{print $2}}'",
-        "Sandbox": "grep 'Sandbox:' {file} | awk -F': ' '{{print $2}}'",
-        "MBF exec time": "grep 'MBF output generation exec time:' {file} | awk -F': ' '{{print $2}}'",
-        "QTM exec time": "grep 'QTM exec time:' {file} | awk -F': ' '{{print $2}}'"
-    }
-    
-    # Define patterns and commands for the controller file
-    controller_patterns = {
-        "Start time": "grep 'Start time:' {file} | awk -F': ' '{{print $2}}'",
-        "Working Directory": "grep 'Working Directory:' {file} | awk -F': ' '{{print $2}}'",
-        "Installation location": "grep 'Installation location:' {file} | awk -F': ' '{{print $2}}'",
-        "Path to Log file": "grep 'Path to Log file:' {file} | awk -F': ' '{{print $2}}'",
-        "Running Information": "grep 'Running Information:' {file}",
-        "Build information": "grep 'Build information:' {file}",
-        "Ending time": "grep 'Ending time:' {file} | awk -F': ' '{{print $2}}'",
-        "Session Duration": "grep 'Session Duration:' {file} | awk -F': ' '{{print $2}}'",
-        "Fatal Count": "grep 'Fatal Count:' {file} | awk -F': ' '{{print $2}}'",
-        "Error Count": "grep 'Error Count:' {file} | awk -F': ' '{{print $2}}'",
-        "Warning Count": "grep 'Warning Count:' {file} | awk -F': ' '{{print $2}}'",
-        "Exit code with description": "grep 'Exit code:' {file} | awk -F': ' '{{print $2}}'"
-    }
-    
-    # Extract information from both files
-    tmilt_info = extract_info_from_file(tmilt_file, tmilt_patterns)
-    controller_info = extract_info_from_file(controller_file, controller_patterns)
-    
-    # Combine the sections with titles
-    sections_to_write = [
-        ("Tmilt File Information", tmilt_info),
-        ("Controller File Information", controller_info)
+    # Define the file paths (multiple files)
+    tmilt_files = [
+        "/home/emumba/PythonTasks/Task7/tmilt.0.231215.075551.6BT+.3FzgZTbd.log",
+        # Add more tmilt files here
     ]
     
+    controller_files = [
+        "/home/emumba/PythonTasks/Task7/controller.231215.075537.fpMs.8qpS7S5pG.log",
+        # Add more controller files here
+    ]
+    
+    output_file = "/home/emumba/PythonTasks/Task7/parsed_information.txt"
+    
+    # Process tmilt and controller files
+    tmilt_info = process_tmilt_files(tmilt_files)
+    controller_info = process_controller_files(controller_files)
+    
     # Write combined information to the output file
-    write_to_output_file(output_file, sections_to_write)
+    write_to_output_file(output_file, tmilt_info, controller_info)
 
     print(f"Parsed information saved to {output_file}")
