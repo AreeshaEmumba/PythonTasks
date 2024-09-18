@@ -1,0 +1,30 @@
+File: /home/emumba/PythonTasks/Task7/tmilt.0.231215.075551.6BT+.3FzgZTbd.log
+Working dir: #    /mnt/storage_d2s/d2suser06/fermi/cdp-data/designs/11610
+Installation Location: #    /mnt/storage_d2s/d2suser06/releases/ILT.2023.02.ilt-cdp43
+Log file Path: #    /mnt/storage_d2s/d2suser06/fermi/cdp-data/designs/11610/logs/optimization/tmilt.0.231215.075551.6BT+.3FzgZTbd.log
+Host: 'big-0-11.local'.''
+Current OS: Linux/x86_64, 3.10.0-957.10.1.el7.x86_64 #1 SMP Mon Mar 18 15:06:45 UTC 2019
+Uptime: 14d 15:21:13
+RAM: 1,081,592,262,656
+Build information: #   Program 'tmilt':
+Release: 
+Build: 
+Revision: 
+Sandbox: 
+MBF exec time: 192.783 seconds.
+QTM exec time: 11062.5420
+
+File: /home/emumba/PythonTasks/Task7/controller.231215.075537.fpMs.8qpS7S5pG.log
+Start time: 
+Working Directory: #    /mnt/storage_d2s/d2suser06/releases
+Installation location: #    /mnt/storage_d2s/d2suser06/releases/ILT.2023.02.ilt-cdp43
+This log file is:: #    /mnt/storage_d2s/d2suser06/fermi/cdp-data/designs/11610/logs/controller.231215.075537.fpMs.8qpS7S5pG.log
+All Running Information: 
+All Build information: #   Program 'controller':
+Ending time: 
+Session Duration: 16133 seconds
+Fatal Count: 
+Error Count: 
+Warning Count: 
+Exit code with description: 
+
